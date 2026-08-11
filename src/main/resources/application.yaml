@@ -1,4 +1,24 @@
 spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/customer
+    username: notpoggoez
+    password: password
+    jpa:
+      hibernate:
+        ddl-auto: validate
+      properties:
+        hibernate:
+          dialect: org.hibernate.dialect.PostgreSQLDialect
+          format_sql: true
+      show-sql: true
+    main:
+      web-application-type: servlet
+    servlet:
+      multipart:
+        max-file-size: 10MB
+        max-request-size: 10MB
+    codec:
+      max-in-memory-size: 10MB
   application:
     name: user-management-api
 
@@ -14,3 +34,8 @@ cors:
 
 jwt:
   secret-key: ${JWT_SECRET_KEY:foobar_123456789_foobar_123456789_foobar_123456789_foobar_123456789}
+
+
+aws:
+  region: us-east-1
+
