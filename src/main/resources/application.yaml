@@ -38,4 +38,7 @@ jwt:
 
 aws:
   region: us-east-1
+  s3:
+    buckets:
+      customer: notpoggoez-customer
 

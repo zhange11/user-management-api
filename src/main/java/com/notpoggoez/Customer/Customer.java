@@ -62,6 +62,15 @@ public class Customer implements UserDetails {
         this.profileImageId = profileImageId;
     }
 
+    public Customer(String username, String email, Integer age, Gender gender, String password) {
+        this.username = username;
+        this.email = email;
+        this.age = age;
+        this.gender = gender;
+        this.password = password;
+    }
+
+
     public String getProfileImageId() {
         return profileImageId;
     }
