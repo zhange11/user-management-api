@@ -1,7 +1,6 @@
 package com.notpoggoez.Security;
 
 import com.notpoggoez.Customer.CustomerRepository;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
