@@ -22,13 +22,14 @@ public class SecurityFilterChainConfig {
     private final AuthenticationProvider authenticationProvider;
     private final JWTAuthFilter jwtAuthFilter;
     private final AuthenticationEntryPoint authenticationEntryPoint;
-
+    private final OAuth2LoginHandler oAuth2LoginHandler;
     public SecurityFilterChainConfig(AuthenticationProvider authenticationProvider, JWTAuthFilter jwtAuthFilter,
-                                     @Qualifier("delegatedAuthEntryPoint") AuthenticationEntryPoint authenticationEntryPoint) {
+                                     @Qualifier("delegatedAuthEntryPoint") AuthenticationEntryPoint authenticationEntryPoint,
+                                     OAuth2LoginHandler oAuth2LoginHandler) {
         this.authenticationEntryPoint = authenticationEntryPoint;
         this.jwtAuthFilter = jwtAuthFilter;
         this.authenticationProvider = authenticationProvider;
-
+        this.oAuth2LoginHandler = oAuth2LoginHandler;
     }
 
     @Bean
@@ -51,16 +52,19 @@ public class SecurityFilterChainConfig {
                 .permitAll()
                 .requestMatchers(HttpMethod.GET, "/actuator/**")
                 .permitAll()
-                .anyRequest().authenticated()
+                                .requestMatchers("/oauth2/**", "/login/oauth2/**")
+                                .permitAll()
+                                .anyRequest().authenticated()
+
                 )
 
-                .sessionManagement(session -> session
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                )
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(
                         jwtAuthFilter,
                         UsernamePasswordAuthenticationFilter.class
+                )
+                .oauth2Login(oauth2 -> oauth2
+                        .successHandler(oAuth2LoginHandler)
                 )
                 .exceptionHandling(ex -> ex
                 .authenticationEntryPoint(authenticationEntryPoint)
