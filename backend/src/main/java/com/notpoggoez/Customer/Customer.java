@@ -133,6 +133,10 @@ public class Customer implements UserDetails {
         this.role = role;
     }
 
+    public Role getRole() {
+        return role;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority("ROLE_" + this.role.name()));
