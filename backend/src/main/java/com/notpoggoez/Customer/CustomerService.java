@@ -60,7 +60,9 @@ public class CustomerService {
                 customerRegistrationRequest.email(),
                 customerRegistrationRequest.age(),
                 customerRegistrationRequest.gender(),
-                passwordEncoder.encode(customerRegistrationRequest.password()));
+                passwordEncoder.encode(customerRegistrationRequest.password())
+            );
+        customer.setRole(Role.USER);
 
         customerDao.insertCustomer(customer);
     }

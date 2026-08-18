@@ -129,6 +129,10 @@ public class Customer implements UserDetails {
         this.ID = ID;
     }
 
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority("ROLE_" + this.role.name()));
