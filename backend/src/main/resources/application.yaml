@@ -64,3 +64,6 @@ aws:
     buckets:
       customer: notpoggoez-customer
 
+sqs:
+  file-upload-queue-url: ${FILE_UPLOAD_QUEUE_URL"}
+    
